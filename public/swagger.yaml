@@ -1,8 +1,8 @@
-swagger: '2.0'
+swagger: "2.0"
 
 info:
   version: "0.0.1"
-  title: Python Flask REST API
+  title: Sustainable Price
 
 consumes:
   - text/plain
@@ -13,19 +13,36 @@ produces:
 paths:
   /health:
     get:
-      operationId: get
-      description: Get health status of  
+      operationId: get-health
+      description: Get health status of
       responses:
         200:
           description: "Health check response"
           schema:
             $ref: "#/definitions/healthResponse"
           examples:
-            application/json: { "status": "UP"}
-
+            application/json: { "status": "UP" }
+  /get_recommended:
+    get:
+      operationId: get-recommended
+      description: get recommended products for a product id and user profile
+      responses:
+        200:
+          description: "get recommended products for a product id and user profile"
+          schema:
+            $ref: "#/definitions/getRecommendedResponse"
+          examples:
+            application/json: [{ "name": "test" }]
 definitions:
   healthResponse:
     type: "object"
     properties:
       status:
         type: "string"
+  getRecommendedResponse:
+    type: "array"
+    items:
+      type: "object"
+      properties:
+        name:
+          type: "string"
