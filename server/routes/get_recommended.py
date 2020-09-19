@@ -10,11 +10,11 @@ def get_recommended():
     barcode = request.args.get('barcode')
     persona = request.args.get('persona')
 
-    # r = requests.get('https://hackzurich-api.migros.ch/products',
-    #                  auth=('hackzurich2020', 'uhSyJ08KexKn4ZFS'))
+    r = requests.get('https://hackzurich-api.migros.ch/products',
+                     auth=('hackzurich2020', 'uhSyJ08KexKn4ZFS'))
 
-    # r.raise_for_status()
-    # data = r.json()
+    r.raise_for_status()
+    data = r.json()
     return jsonify([{"productID": "firstID",
                      "name": "tomatoes",
                      "image": None

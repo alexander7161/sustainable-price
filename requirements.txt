@@ -1,6 +1,0 @@
-gunicorn
-ibmcloudenv
-livereload
-Flask
-prometheus_client
-requests
