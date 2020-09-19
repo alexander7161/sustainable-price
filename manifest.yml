@@ -2,3 +2,5 @@
   - name: GetStartedPython
     random-route: true
     memory: 128M
+    command: python manage.py
+
