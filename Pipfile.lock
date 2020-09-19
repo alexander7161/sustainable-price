@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "8db2b9b7bf75eb23d78d8a5b3de15a14a3e328164c4e7331061e54e4901845bb"
+            "sha256": "47cb2f57d83c13b8c66c39117a60ed14f406c77fb625f0434eec67df1062a998"
         },
         "pipfile-spec": 6,
         "requires": {},
@@ -36,6 +36,14 @@
             "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4'",
             "version": "==7.1.2"
         },
+        "country-list": {
+            "hashes": [
+                "sha256:b849f59ce245bacf357c065507c9b8bf56ae3ecaa5f741886991f24345d7c6a6",
+                "sha256:f73c4d319faa46541470918bb9e9dd5592401f316ee68f3fe55e90acf410f8a3"
+            ],
+            "index": "pypi",
+            "version": "==0.2.1"
+        },
         "decorator": {
             "hashes": [
                 "sha256:41fa54c2a0cc4ba648be4fd43cff00aedf5b9465c9bf18d64325bc225f08f760",
@@ -50,6 +58,21 @@
             ],
             "index": "pypi",
             "version": "==1.1.2"
+        },
+        "geographiclib": {
+            "hashes": [
+                "sha256:12bd46ee7ec25b291ea139b17aa991e7ef373e21abd053949b75c0e9ca55c632",
+                "sha256:51cfa698e7183792bce27d8fb63ac8e83689cd8170a730bf35e1a5c5bf8849b9"
+            ],
+            "version": "==1.50"
+        },
+        "geopy": {
+            "hashes": [
+                "sha256:b88e189f0d2e0051da45b6311d5b2ced59afaf1378eb27ebb57eaf37c166a03b",
+                "sha256:fdc596bab67d9f4828f43bf9e97c4e0a1d1518b7c2357485cef0e1c3cf470220"
+            ],
+            "index": "pypi",
+            "version": "==2.0.0"
         },
         "gunicorn": {
             "hashes": [
