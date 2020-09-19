@@ -1,2 +1,5 @@
-Flask
 gunicorn
+ibmcloudenv
+livereload
+Flask
+prometheus_client
