@@ -15,11 +15,11 @@ def get_recommended():
 
     # r.raise_for_status()
     # data = r.json()
-    return [{"productID": "firstID",
-             "name": "tomatoes",
-             "image": None
-             },
-            {"productID": "secondID",
-             "name": "potatos",
-             "image": None
-             }]
+    return jsonify([{"productID": "firstID",
+                     "name": "tomatoes",
+                     "image": None
+                     },
+                    {"productID": "secondID",
+                     "name": "potatos",
+                     "image": None
+                     }])
