@@ -1,0 +1,21 @@
+name: Deploy to IBM Cloud Foundry
+on:
+  push:
+    branches: [master]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Deploy MyApp
+      uses: subhamx/ibm-cloud-foundry-deploy@master
+      with:
+        API_KEY: ${{ secrets.IBM_API_KEY }}
+        # Cloud Foundry API Endpoint
+        CF_API_ENDPOINT: ${{ secrets.CF_API_ENDPOINT }}
+        # Path to manifest.yml
+        MANIFEST_FILE_PATH: './manifest.yml'
+        # Cloud Foundry ORG Name
+        ORG: ${{ secrets.ORG }}
+        # Cloud Foundry Space Name for the specified ORG
+        SPACE: ${{ secrets.SPACE }}
