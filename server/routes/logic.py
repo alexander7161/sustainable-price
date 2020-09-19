@@ -151,7 +151,7 @@ class Logic:
         original_product = response.json()
 
         # product name
-        original_product_name = original_product['names']['name_rpa']
+        original_product_name = original_product['name']
 
         # get nutrients
         nutrients = {}

@@ -10,12 +10,12 @@ PARAM_HEALTHY = 'healthy'
 PARAM_SAVER = 'saver'
 
 MAP_ARG_TO_PERSONA = {
-    PARAM_SUSTAINABLE: {'price': 0, 'sustainability': 1, 'nutri_score': 0},
-    PARAM_HEALTHY: {'price': 0, 'sustainability': 0, 'nutri_score': 1},
-    PARAM_SAVER: {'price': 1, 'sustainability': 0, 'nutri_score': 0},
-    f"{PARAM_SUSTAINABLE}-{PARAM_HEALTHY}": {'price': 0, 'sustainability': 0.5, 'nutri_score': 0.5},
-    f"{PARAM_SUSTAINABLE}-{PARAM_SAVER}": {'price': 0.5, 'sustainability': 0.5, 'nutri_score': 0},
-    f"{PARAM_HEALTHY}-{PARAM_SAVER}": {'price': 0.5, 'sustainability': 0, 'nutri_score': 0.5},
+    PARAM_SUSTAINABLE: {'price': 0.04, 'sustainability': 0.92, 'nutri_score': 0.04},
+    PARAM_HEALTHY: {'price': 0.04, 'sustainability': 0.04, 'nutri_score': 0.92},
+    PARAM_SAVER: {'price': 0.92, 'sustainability': 0.04, 'nutri_score': 0.04},
+    f"{PARAM_SUSTAINABLE}-{PARAM_HEALTHY}": {'price': 0.04, 'sustainability': 0.48, 'nutri_score': 0.48},
+    f"{PARAM_SUSTAINABLE}-{PARAM_SAVER}": {'price': 0.48, 'sustainability': 0.48, 'nutri_score': 0.04},
+    f"{PARAM_HEALTHY}-{PARAM_SAVER}": {'price': 0.48, 'sustainability': 0.04, 'nutri_score': 0.48},
     'all': {'price': 0.333, 'sustainability': 0.334, 'nutri_score': 0.333},
 }
 
