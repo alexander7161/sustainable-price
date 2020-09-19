@@ -1,4 +1,4 @@
   applications:
-  - name: GetStartedPython
+  - name: sustainable-price
     random-route: true
     memory: 128M
