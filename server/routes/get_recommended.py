@@ -31,7 +31,7 @@ def get_recommended():
     logic = Logic()
     data = logic.compare_products(barcode, map_persona(persona))
 
-    return jsonify(data), 200, {'Content-type': 'application/json', 'Access-Control-Allow-Origin': '*'}
+    return jsonify(data), 200, {'Content-type': 'application/json'}
 
 
 def map_persona(persona):
