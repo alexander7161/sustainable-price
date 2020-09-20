@@ -109,8 +109,8 @@ class Logic:
 
         all_product_details = list(map(lambda x: dict(
             x,
-            **{'score_sustainability': get_distance_score(x['origin_distance_km']),
-               'score_sustainability_color': self.value_color(get_distance_score(x['origin_distance_km']))}
+            **{'score_sustainability': get_distance_score(x['origin_distance_km'])*0.8+x['has_label']*0.2,
+               'score_sustainability_color': self.value_color(get_distance_score(x['origin_distance_km'])*0.8+x['has_label']*0.2)}
         ), all_product_details))
 
         # compute nutrition score
@@ -220,7 +220,6 @@ class Logic:
                                                                        "L43", "L44", "L45", "L46", "L55", "L56", "L57",
                                                                        "L59", "L60", "L62", "L64", "L65", "L67", "L68",
                                                                        "L69", "L71", "TIW"]
-            original_product_label = True
 
         # product picture URL
         original_product_picture_url = original_product['image']['original']
