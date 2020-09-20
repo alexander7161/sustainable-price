@@ -279,7 +279,7 @@ class Logic:
             quantity = float(quantity_match.group(1)) * float(quantity_match.group(2))
             return self.map_quantitiy(quantity, quantity_match.group(3))
         elif re.match("(\d+)(\w+)", quantity_string):
-            quantity_match = re.search("(\d+)(\w+)")
+            quantity_match = re.search("(\d+)(\w+)", quantity_string)
             return self.map_quantitiy(float(quantity_match.group(1)), quantity_match.group(2))
         else:
             return quantity_string
