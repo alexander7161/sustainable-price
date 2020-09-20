@@ -64,28 +64,26 @@ class Logic:
         all_product_details = list(map(lambda x: dict(x, **{'score': 0.0}), all_product_details))
 
         # compute price score
-        all_prices_abs = list(map(lambda x: x['price'], all_product_details))
-        all_quantities = list(map(lambda x: float(re.sub('[^0-9.]', '', x['display_quantity'])), all_product_details))
-        all_prices = [p / q for p, q in zip(all_prices_abs, all_quantities)]
+        all_prices_abs = list(map(lambda x: x['base_price'], all_product_details))
 
-        max_price = float(max(all_prices))
-        min_price = float(min(all_prices))
+        max_price = float(max(all_prices_abs))
+        min_price = float(min(all_prices_abs))
 
         print(all_product_details)
         print(user_weights['price'])
 
         all_product_details = list(map(lambda x: dict(
             x,
-            **{'score': x['score'] + user_weights['price'] * (
-                    x['price'] / float(re.sub('[^0-9.]', '', x['display_quantity'])) - min_price) / (
-                                max_price - min_price)}
+            **{'score': x['score'] + user_weights['price'] * (1-(
+                    x['base_price'] - min_price) / (
+                                max_price - min_price))}
         ), all_product_details))
 
         all_product_details = list(map(lambda x: dict(
             x,
-            **{'score_price': (x['price'] / float(re.sub('[^0-9.]', '', x['display_quantity'])) - min_price) / (
+            **{'score_price': 1 - (x['base_price'] - min_price) / (
                     max_price - min_price),
-               'score_price_color': self.value_color((x['price'] / float(re.sub('[^0-9.]', '', x['display_quantity'])) - min_price) / (
+               'score_price_color': self.value_color(1-(x['base_price'] - min_price) / (
                        max_price - min_price))}
         ), all_product_details))
 
@@ -210,7 +208,8 @@ class Logic:
         # quantity/unit
         original_product_quantity = original_product['price']['item']['quantity']
         original_product_unit = original_product['price']['item']['unit']
-        original_product_display_quantity = original_product['price']['item']['display_quantity']
+        quantitiy_string = original_product['price']['item']['display_quantity']
+        original_product_display_quantity = self.parse_quantity(quantitiy_string)
 
         # label available?
         original_product_label = False
@@ -235,10 +234,12 @@ class Logic:
             'customer_rating': original_product_rating,
             'nutri_score': original_product_nutri_score,
             'price': original_product_price,
-            # 'base_price': original_product_base_price,
             'picture_url': original_product_picture_url,
             'quantity': original_product_quantity,
-            'display_quantity': original_product_display_quantity,
+            'display_quantity': quantitiy_string,
+            'base_quantity': original_product_display_quantity['quantity'],
+            'base_unit': original_product_display_quantity['unit'],
+            'base_price': original_product_price / original_product_display_quantity['quantity'],
             'unit': original_product_unit,
         }
 
@@ -271,3 +272,25 @@ class Logic:
             return "orange"
         else:
             return "green"
+
+    def parse_quantity(self, quantity_string: str):
+        if re.match("(\d+) x (\d+)(\w+)", quantity_string):
+            quantity_match = re.search("(\d+) x (\d+)(\w+)", quantity_string)
+            quantity = float(quantity_match.group(1)) * float(quantity_match.group(2))
+            return self.map_quantitiy(quantity, quantity_match.group(3))
+        elif re.match("(\d+)(\w+)", quantity_string):
+            quantity_match = re.search("(\d+)(\w+)")
+            return self.map_quantitiy(float(quantity_match.group(1)), quantity_match.group(2))
+        else:
+            return quantity_string
+
+    def map_quantitiy(self, quantity: float, unit: str):
+        mapper = {
+            'l': {'quantity': quantity, 'unit': 'l'},
+            'dl': {'quantity': quantity / 10, 'unit': 'l'},
+            'cl': {'quantity': quantity / 100, 'unit': 'l'},
+            'ml': {'quantity': quantity / 1000, 'unit': 'l'},
+            'kg': {'quantity': quantity, 'unit': 'kg'},
+            'g': {'quantity': quantity / 1000, 'unit': 'kg'},
+        }
+        return mapper[unit]
