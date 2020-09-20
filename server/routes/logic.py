@@ -244,7 +244,7 @@ class Logic:
 
     def get_group_products(self, category_code):
         # TODO: INCREASE LIMIT
-        LIMIT = 20
+        LIMIT = 10
 
         query_category = {
             'limit': LIMIT,
