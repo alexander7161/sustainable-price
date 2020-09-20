@@ -1,5 +1,5 @@
 import requests_cache
-from flask import jsonify, request
+from flask import jsonify, request, Response
 from server import app
 requests_cache.install_cache()
 from .logic import Logic
@@ -31,7 +31,7 @@ def get_recommended():
     logic = Logic()
     data = logic.compare_products(barcode, map_persona(persona))
 
-    return jsonify(data)
+    return jsonify(data), 200, {'Content-type': 'application/json'}
 
 
 def map_persona(persona):
