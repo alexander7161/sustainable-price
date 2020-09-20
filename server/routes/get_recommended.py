@@ -1,7 +1,6 @@
 import requests_cache
 from flask import jsonify, request
 from server import app
-import json
 requests_cache.install_cache()
 from .logic import Logic
 

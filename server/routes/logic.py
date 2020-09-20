@@ -10,6 +10,7 @@ import requests_cache
 
 requests_cache.install_cache('demo_cache')
 
+RETRY_MAX = 5
 
 class Logic:
     def __init__(self):
@@ -31,7 +32,14 @@ class Logic:
     # }
     def compare_products(self, original_gtin, user_weights):
         # get product details
-        original_product_id = self.product_id_from_gtin(gtin=original_gtin)
+        retry = 0
+        while retry < RETRY_MAX:
+            try:
+                retry += 1
+                original_product_id = self.product_id_from_gtin(gtin=original_gtin)
+            except Exception:
+                print(f"api error on {original_gtin}")
+
         print(original_product_id)
         original_product_details = self.product_details_from_id(product_id=original_product_id)
 
