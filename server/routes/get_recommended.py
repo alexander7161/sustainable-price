@@ -1,8 +1,8 @@
+from .logic import Logic
 import requests_cache
 from flask import jsonify, request, Response
 from server import app
 requests_cache.install_cache()
-from .logic import Logic
 
 PARAM_SUSTAINABLE = 'sustainable'
 PARAM_HEALTHY = 'healthy'
@@ -17,6 +17,7 @@ MAP_ARG_TO_PERSONA = {
     f"{PARAM_HEALTHY}-{PARAM_SAVER}": {'price': 0.48, 'sustainability': 0.04, 'nutri_score': 0.48},
     'all': {'price': 0.333, 'sustainability': 0.334, 'nutri_score': 0.333},
 }
+
 
 @app.route("/get_recommended")
 def get_recommended():
@@ -48,3 +49,6 @@ def map_persona(persona):
             return MAP_ARG_TO_PERSONA[f"{PARAM_HEALTHY}-{PARAM_SAVER}"]
 
 
+@app.errorhandler(Exception)
+def all_exception_handler(error):
+    return {"error": "Error occured", "status": 500}, 500
