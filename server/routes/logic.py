@@ -45,7 +45,11 @@ class Logic:
         # get related product information
         all_product_details = [original_product_details]
         for product_id in related_product_ids:
-            all_product_details.append(self.product_details_from_id(product_id=product_id))
+            try:
+                product_detail = self.product_details_from_id(product_id=product_id)
+                all_product_details.append(product_detail)
+            except Exception:
+                print(f"process of {product_id} failed")
 
         # compute scores
         # add 'score' to dicts
@@ -151,6 +155,7 @@ class Logic:
         original_product = response.json()
 
         # product name
+        print(original_product)
         original_product_name = original_product['name']
 
         # get nutrients
@@ -231,7 +236,7 @@ class Logic:
 
     def get_group_products(self, category_code):
         # TODO: INCREASE LIMIT
-        LIMIT = 3
+        LIMIT = 20
 
         query_category = {
             'limit': LIMIT,
