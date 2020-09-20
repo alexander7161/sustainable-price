@@ -274,12 +274,12 @@ class Logic:
             return "green"
 
     def parse_quantity(self, quantity_string: str):
-        if re.match("(\d+) x (\d+)(\w+)", quantity_string):
-            quantity_match = re.search("(\d+) x (\d+)(\w+)", quantity_string)
+        if re.match("(\d+) x (\d+)\s*(\w+)", quantity_string):
+            quantity_match = re.search("(\d+) x (\d+)\s*(\w+)", quantity_string)
             quantity = float(quantity_match.group(1)) * float(quantity_match.group(2))
             return self.map_quantitiy(quantity, quantity_match.group(3))
-        elif re.match("(\d+)(\w+)", quantity_string):
-            quantity_match = re.search("(\d+)(\w+)", quantity_string)
+        elif re.match("(\d+)\s*(\w+)", quantity_string):
+            quantity_match = re.search("(\d+)\s*(\w+)", quantity_string)
             return self.map_quantitiy(float(quantity_match.group(1)), quantity_match.group(2))
         else:
             return quantity_string
